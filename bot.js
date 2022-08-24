@@ -15,8 +15,8 @@
 let BOT_VERSION = "2.1.1";
 
 // Define Discord objects
-import { Client } from 'discord.js';
-const client = new Client({ intents: 33281 }); // https://ziad87.net/intents/
+import { Client, Intents } from 'discord.js';
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }); // [MESSAGE_CONTENT]
 
 // Define helper objects
 import https from 'https';
@@ -622,7 +622,7 @@ function getJsonStats() {
                     consoleLog(`Successful: getJsonStats collection`);
                     resolve(jsonStats);
                 } catch (e) {
-                    consoleLog(`Error in getJsonStats: ${e}`);
+                    consoleLog(`Error in getJsonStats: ${e} || Data: ${data}`);
                     resolve(jsonStats);
                 }
             }).on('error', (e) => {
@@ -652,7 +652,7 @@ function getJsonBlocks() {
                     consoleLog(`Successful: getJsonBlocks collection`);
                     resolve(jsonBlocks);
                 } catch (e) {
-                    consoleLog(`Error in getJsonBlocks: ${e}`);
+                    consoleLog(`Error in getJsonBlocks: ${e} || Data: ${data}`);
                     resolve(jsonBlocks);
                 }
             }).on('error', (e) => {
@@ -682,7 +682,7 @@ function getJsonWorkers() {
                     consoleLog(`Successful: getJsonWorkers collection`);
                     resolve(jsonWorkers);
                 } catch (e) {
-                    consoleLog(`Error in getJsonWorkers: ${e}`);
+                    consoleLog(`Error in getJsonWorkers: ${e} || Data: ${data}`);
                     resolve(jsonWorkers);
                 }
             }).on('error', (e) => {
@@ -712,7 +712,7 @@ function getJsonMiners() {
                     consoleLog(`Successful: getJsonMiners collection`);
                     resolve(jsonMiners);
                 } catch (e) {
-                    consoleLog(`Error in getJsonMiners: ${e}`);
+                    consoleLog(`Error in getJsonMiners: ${e} || Data: ${data}`);
                     resolve(jsonMiners);
                 }
             }).on('error', (e) => {
@@ -742,7 +742,7 @@ function getJsonPayments() {
                     consoleLog(`Successful: getJsonPayments collection`);
                     resolve(jsonPayments);
                 } catch (e) {
-                    consoleLog(`Error in getJsonPayments: ${e}`);
+                    consoleLog(`Error in getJsonPayments: ${e} || Data: ${data}`);
                     resolve(jsonPayments);
                 }
             }).on('error', (e) => {
@@ -830,7 +830,7 @@ function getVelocity() {
 
 // Set the current Hash Rate and Miner Count as the bot's activity
 function setHashRateActivity() {
-    let activity = `${jsonStats.body?.primary.hashrate.shared} | ${jsonStats.body?.primary.status.workers} mining | ${config.prefix}help`;
+    let activity = `${(jsonStats.body?.primary.hashrate.shared / 1_000_000).toFixed(2)} MH/s | ${jsonStats.body?.primary.status.workers} mining | ${config.prefix}help`;
     client.user.setActivity(activity, { type: 'WATCHING' });
 }
 
@@ -848,16 +848,16 @@ function getPoolBlockData() {
     }
 
     try {
-        if (blockNode.pending[0].height > latestBlock.height) {
+        if (blockNode?.pending[0].height > latestBlock?.height) {
             latestBlock = blockNode.pending[0];
             consoleLog(`New block solved: #${jsonStats.body?.primary.blocks.valid + 489 + blockNode.pending.length} (${jsonStats.body?.primary.blocks.valid + 489} confirmed, ${blockNode.pending.length} pending)`);
             msg += '```css\n';
             msg += `We solved a block! (#${blockNode.pending[0].height})\n`;
-            msg += `${jsonStats.body.primary.blocks.valid+489} confirmed, ${blockNode.pending.length} pending\n`;
+            msg += `${jsonStats.body?.primary.blocks.valid + 489} confirmed, ${blockNode.pending.length} pending\n`;
             msg += ` Difficulty: ${latestBlock.difficulty}\n`;
             msg += `       Hash: ${latestBlock.hash}\n`;
             msg += `       Luck: ${latestBlock.luck}\n`;
-            msg += `     Reward: ${latestBlock.reward/100000000}\n`;
+            msg += `     Reward: ${latestBlock.reward / 100000000}\n`;
             msg += `      Round: ${latestBlock.round}\n`;
             msg += `       Solo: ${latestBlock.solo}\n`;
             msg += `Transaction: ${latestBlock.transaction}\n`;
