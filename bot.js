@@ -126,6 +126,7 @@ client.on("messageCreate", message => {
 
     // Store the message author for ease of reference later
     let messageSender = message.member.user;
+    consoleLog(toString(message.member.user))
 
     // Define the member in the members JSON object if they haven't been seen yet
     // This will avoid issues when querying data points that are not yet defined
@@ -139,6 +140,7 @@ client.on("messageCreate", message => {
     // Determine if the user is in a role defined in the "bot_admin_roles" declaration to allow for admin commands
     let isAdmin = false;
     for (var i = 0; i < botAdminRoles.length; i++) {
+        consoleLog(toString(message.member.roles))
         if (message.member.roles === botAdminRoles[i])
             isAdmin = true;
     }
