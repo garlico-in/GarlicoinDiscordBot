@@ -126,7 +126,7 @@ client.on("messageCreate", message => {
 
     // Store the message author for ease of reference later
     let messageSender = message.member.user;
-    consoleLog(toString(message.member.user))
+    consoleLog(toString(messageSender))
 
     // Define the member in the members JSON object if they haven't been seen yet
     // This will avoid issues when querying data points that are not yet defined
@@ -135,6 +135,7 @@ client.on("messageCreate", message => {
 
     // Split the message into an array of arguments and set the first element as the command
     let args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+    consoleLog(message.content)
     let command = args.shift().toLowerCase();
 
     // Determine if the user is in a role defined in the "bot_admin_roles" declaration to allow for admin commands
