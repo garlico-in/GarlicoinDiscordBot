@@ -850,14 +850,14 @@ function getPoolBlockData() {
             consoleLog(`New block solved: #${jsonStats.body?.primary.blocks.valid + 489 + blockNode.pending.length} (${jsonStats.body?.primary.blocks.valid + 489} confirmed, ${blockNode.pending.length} pending)`);
             msg += '```css\n';
             msg += `We solved a block! (#${blockNode.pending[0].height})\n`;
-            //msg += `${jsonStats.body.primary.blocks.valid+489} confirmed, ${blockNode.pending.length} pending\n`;
-            //msg += ` Difficulty: ${latestBlock.difficulty}\n`;
-            //msg += `       Hash: ${latestBlock.hash}\n`;
-            //msg += `       Luck: ${latestBlock.luck}\n`;
-            //msg += `     Reward: ${latestBlock.reward/100000000}\n`;
-            //msg += `      Round: ${latestBlock.round}\n`;
+            msg += `${jsonStats.body.primary.blocks.valid+489} confirmed, ${blockNode.pending.length} pending\n`;
+            msg += ` Difficulty: ${latestBlock.difficulty}\n`;
+            msg += `       Hash: ${latestBlock.hash}\n`;
+            msg += `       Luck: ${latestBlock.luck}\n`;
+            msg += `     Reward: ${latestBlock.reward/100000000}\n`;
+            msg += `      Round: ${latestBlock.round}\n`;
             msg += `       Solo: ${latestBlock.solo}\n`;
-            //msg += `Transaction: ${latestBlock.transaction}\n`;
+            msg += `Transaction: ${latestBlock.transaction}\n`;
             msg += `     Worker: ${latestBlock.worker}\n`;
             msg += '```';
         }
@@ -955,13 +955,13 @@ function saveMembers(reason) {
 }
 
 // Activate any timer-based functions
-setInterval(getJsonPayments, 10000);
-setInterval(getJsonMiners, 10000);
-setInterval(getJsonWorkers, 10000);
-setInterval(getJsonBlocks, 10000);
-setInterval(getJsonStats, 10000);
-setInterval(getPoolBlockData, 10000);
-setInterval(setHashRateActivity, 10000);
+setInterval(getJsonPayments, 20000);
+setInterval(getJsonMiners, 20000);
+setInterval(getJsonWorkers, 20000);
+setInterval(getJsonBlocks, 20000);
+setInterval(getJsonStats, 20000);
+setInterval(getPoolBlockData, 20000);
+setInterval(setHashRateActivity, 20000);
 
 // Log in to Discord to be present online
 try {
