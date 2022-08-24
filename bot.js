@@ -955,13 +955,13 @@ function saveMembers(reason) {
 }
 
 // Activate any timer-based functions
-setInterval(getJsonPayments, 20000);
-setInterval(getJsonMiners, 20000);
-setInterval(getJsonWorkers, 20000);
-setInterval(getJsonBlocks, 20000);
-setInterval(getJsonStats, 20000);
-setInterval(getPoolBlockData, 20000);
-setInterval(setHashRateActivity, 20000);
+setInterval(getJsonPayments, 40000);
+setInterval(getJsonMiners, 40000);
+setInterval(getJsonWorkers, 40000);
+setInterval(getJsonBlocks, 40000);
+setInterval(getJsonStats, 40000);
+setInterval(getPoolBlockData, 40000);
+setInterval(setHashRateActivity, 40000);
 
 // Log in to Discord to be present online
 try {
